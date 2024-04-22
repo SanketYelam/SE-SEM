@@ -1,0 +1,35 @@
+This code implements the Koch curve fractal using OpenGL and GLUT. The Koch curve is a recursive geometric pattern created by dividing a line segment into four equal parts and replacing the middle section with an equilateral triangle. The process is repeated recursively for each line segment.
+
+Let's examine the code step by step:
+
+1. The necessary header files, `GL/glut.h` and `math.h`, are included.
+
+2. Global variables `oldx` and `oldy` are declared and initialized. These variables represent the starting point of each line segment.
+
+3. The `drawkoch` function is defined. It takes three parameters: the direction of the line segment (`dir`), the length of the line segment (`len`), and the number of iterations (`iter`). Here's an explanation of the function:
+
+   - Convert the direction from degrees to radians.
+
+   - Calculate the new endpoint of the line segment based on the current position, direction, and length.
+
+   - If `iter` is 0, draw a line segment from the old endpoint to the new endpoint and update `oldx` and `oldy`.
+
+   - If `iter` is not 0, recursively call `drawkoch` to draw the four parts of the Koch curve. Each part is drawn with a different direction and reduced iteration count.
+
+4. The `display` function is defined. It is called to render the scene. Here's what the function does:
+
+   - Clear the color buffer using `glClear`.
+
+   - Begin drawing lines using `glBegin(GL_LINES)`.
+
+   - Set the color to green using `glColor3f`.
+
+   - Call `drawkoch` three times to draw the three sides of the Koch curve.
+
+   - End drawing lines using `glEnd`.
+
+   - Flush the rendering pipeline using `glFlush`.
+
+5. The `main` function is the entry point of the program. It initializes GLUT, sets the display mode, window size, and position, creates the window, sets the display function, and starts the main GLUT event loop using `glutMainLoop`.
+
+Overall, the code sets up an OpenGL environment, defines the `drawkoch` function to recursively draw the Koch curve, and uses the `display` function to draw the Koch curve by calling `drawkoch` with different directions and iteration counts. The resulting Koch curve is displayed in a window using GLUT.

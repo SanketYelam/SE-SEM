@@ -1,0 +1,51 @@
+This code is a simple implementation of a windmill animation using OpenGL and GLUT (OpenGL Utility Toolkit). The windmill consists of rotating blades attached to a central pole.
+
+Let's go through the code step by step:
+
+1. The necessary header files, `GL/gl.h` and `GL/glut.h`, are included for OpenGL and GLUT functions.
+
+2. The variable `frameNumber` is declared and initialized to 0. This variable will be used to control the rotation of the windmill blades.
+
+3. The `drawWindmill` function is defined. It is responsible for drawing the windmill blades and the central pole. Here's a breakdown of the function:
+
+   - Set the color for the windmill blades using `glColor3f`.
+
+   - Draw the rectangular shape of the central pole using `glBegin(GL_POLYGON)` and `glVertex2f` to specify the vertices of the polygon.
+
+   - Translate the coordinate system to the top of the pole using `glTranslatef`.
+
+   - Set the color for the windmill blades using `glColor3f`.
+
+   - Rotate the coordinate system around the z-axis based on the `frameNumber` to animate the blades' rotation.
+
+   - Use a loop to draw four blades. For each blade:
+
+     - Rotate the coordinate system by 90 degrees around the z-axis.
+
+     - Draw a blade shape using `glBegin(GL_POLYGON)` and `glVertex2f`.
+
+4. The `display` function is defined. It is called to render the scene. Here's what the function does:
+
+   - Clear the color buffer using `glClear`.
+
+   - Load the identity matrix using `glLoadIdentity`.
+
+   - Save the current transformation matrix using `glPushMatrix`.
+
+   - Translate and scale the coordinate system to position the first windmill using `glTranslated` and `glScaled`.
+
+   - Call the `drawWindmill` function to draw the windmill.
+
+   - Restore the previous transformation matrix using `glPopMatrix`.
+
+   - Repeat the same steps for the second windmill, but with different translation and scale values.
+
+   - Swap the front and back buffers using `glutSwapBuffers`.
+
+5. The `doFrame` function is called by a timer. It increments the `frameNumber` and requests a redisplay using `glutPostRedisplay`. It also sets the timer for the next frame using `glutTimerFunc`.
+
+6. The `init` function is responsible for initializing the OpenGL settings. It sets the clear color using `glClearColor` and configures the projection matrix using `glOrtho`.
+
+7. The `main` function is the entry point of the program. It initializes GLUT, sets the display mode, window size, and position, creates the window, and sets the initial state using `init`. It then registers the `display` function as the display callback, the `doFrame` function as the timer callback, and starts the main GLUT event loop using `glutMainLoop`.
+
+Overall, the code sets up a simple OpenGL environment, defines the windmill drawing function, handles the animation by incrementing the frame number, and repeatedly calls the display function to render the windmills with updated transformations.
