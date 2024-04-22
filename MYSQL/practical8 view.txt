@@ -1,0 +1,46 @@
+create database jspm;
+use jspm;
+
+
+create table student(
+s_id int(10),
+name varchar(100),
+city varchar(10)
+);
+
+create table stud_marks(
+name varchar(100),
+marks int(100)
+);
+
+insert into student values (1,'sanket','shrirampur');
+insert into student values (2,'gaurav','pune');
+insert into student values (3,'sagar','sangli');
+insert into student values (4,'ram','parbhani');
+insert into student values (5,'ritesh','beed');
+
+insert into stud_marks values ('sanket',64);
+insert into stud_marks values ('gaurav',34);
+insert into stud_marks values ('sagar',87);
+insert into stud_marks values ('ram',89);
+insert into stud_marks values ('ritesh',90);
+
+select*from student;
+select*from stud_marks;
+
+
+create view v1 as select name,city from student;
+select*from v1;
+
+create view v2 as select marks from stud_marks;
+select*from v2;
+
+create view v3 as select student.s_id,student.name,stud_marks.marks from student,stud_marks where student.name=stud_marks.name;
+
+select*from v3;
+drop view v3;
+
+/*updating view*/
+update v3 set name="lanket" where s_id=3;
+
+

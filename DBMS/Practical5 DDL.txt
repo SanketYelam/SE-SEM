@@ -1,0 +1,47 @@
+
+create database jspm;
+
+use jspm;
+create table SE(Roll_no int(10),Name varchar(30),City varchar(30));
+
+ insert into SE values(2201,"Gaurav",'Pune');
+
+ insert into SE values(2202,"Shubham",'Mulshi');
+
+ insert into SE values(2203,"Ashish",'rajasthan');
+
+ insert into SE values(2204,"Amit",'karntka');
+
+ insert into SE values(2205,"vinayak",'kivale');
+
+select * from SE;
+
+update SE set City="delhi" where Roll_no=2204;
+
+Alter table SE add (Marks int(10));
+
+mysql> select * from SE;
+
+update SE set Marks=90 where Roll_no=2201;
+
+ update SE set Marks=80 where Roll_no=2202;
+
+ update SE set Marks=70 where Roll_no=2203;
+
+ update SE set Marks=60 where Roll_no=2204;
+
+ update SE set Marks=60 where Roll_no=2205;
+
+ select * from SE;
+
+ alter table SE drop Marks;
+
+select * from SE;
+
+ truncate table SE;
+
+ select * from SE;
+
+ drop table SE;
+
+show tables;

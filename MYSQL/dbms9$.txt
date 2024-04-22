@@ -1,0 +1,103 @@
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| company                     |
+| dbms                        |
+| ddl                         |
+| expense_management          |
+| expense_management_20_april |
+| expense_management_26_april |
+| expense_management_27_april |
+| functions                   |
+| information_schema          |
+| joins                       |
+| keyoperations               |
+| library_management          |
+| manager                     |
+| mysql                       |
+| performance_schema          |
+| product_management          |
+| product_management1         |
+| product_management2         |
+| product_management4         |
+| product_service             |
+| sakila                      |
+| school_management_system    |
+| student                     |
+| sys                         |
+| user_service                |
+| visitor_management          |
+| world                       |
++-----------------------------+
+27 rows in set (0.00 sec)
+
+mysql> use ddl;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_ddl |
++---------------+
+| school        |
+| schoolview    |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from school;
++---------+--------+-------+-------------+-----------+
+| roll_no | name   | marks | mobileNo    | subject   |
++---------+--------+-------+-------------+-----------+
+|       1 | gaurav |    80 | 7020611722  | Bio       |
+|       2 | sagar  |    90 | 1020304050  | physics   |
+|       3 | sanket |    95 | 20303030203 | chemistry |
++---------+--------+-------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter//
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delimiter//' at line 1
+mysql> delimiter //
+mysql> create procedure display(IN r int)
+    -> begin
+    -> select * from school where roll_no=r;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call display(2);
+    -> //
++---------+-------+-------+------------+---------+
+| roll_no | name  | marks | mobileNo   | subject |
++---------+-------+-------+------------+---------+
+|       2 | sagar |    90 | 1020304050 | physics |
++---------+-------+-------+------------+---------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create procedure display1(out nm varchar(30))
+    -> begin
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> create procedure display1(in r int ,out nm varchar(30))
+    -> begin
+    -> select name into nm from school where roll_no=r;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call display(2,@n);
+    -> //
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE ddl.display; expected 1, got 2
+mysql> call display1(2,@n);
+    -> //
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select @n;
+    -> //
++-------+
+| @n    |
++-------+
+| sagar |
++-------+
+1 row in set (0.00 sec)
+
+mysql>

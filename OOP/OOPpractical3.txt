@@ -1,0 +1,60 @@
+package oop;
+
+public class Inheritance {
+	public static void main(String []args) {
+		Programmer p = new Programmer("Amit ", 20000);
+		p.salary();
+		Teamlead t = new Teamlead("Pratik shet", 30000);
+		t.salary();
+		APM a = new APM ("Viraj ", 400000);
+		a.salary();
+		ProjectManager pm = new ProjectManager ("Sanket ", 50000);
+		pm.salary();
+		 
+		
+	}
+
+}
+class Empolyee{
+	String name, add ,mail;
+	float id , mobile ,basic;
+	void salary() {
+		float da,hra,pf ,cf,gross;
+		da= basic*97/100;
+		hra=basic*10/100;
+		pf =basic*12/100;
+		cf =basic*0.1f/100;
+		gross=basic+da+hra-pf-cf;
+		System.out.println("Name :"+ name);
+		System.out.println("Basic salary :"+ basic);
+		System.out.println("Gross salary :"+ gross);
+	}
+}
+class Programmer extends Empolyee {
+	Programmer(String name,int sal){
+		this.name=name;
+		basic=sal;
+	}
+	
+}
+class Teamlead extends Empolyee {
+	Teamlead(String name,int sal){
+	this.name=name;
+	basic=sal;
+	}
+	
+}
+class APM extends Empolyee  {
+	APM(String name, int sal){
+		this.name=name;
+		basic=sal;
+	}
+	
+}
+class ProjectManager extends Empolyee{
+	ProjectManager(String name, int sal ){
+		this.name=name;
+		basic=sal;
+	}
+	
+}

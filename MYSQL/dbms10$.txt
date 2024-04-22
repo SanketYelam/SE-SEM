@@ -1,0 +1,112 @@
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| company                     |
+| dbms                        |
+| ddl                         |
+| expense_management          |
+| expense_management_20_april |
+| expense_management_26_april |
+| expense_management_27_april |
+| functions                   |
+| information_schema          |
+| joins                       |
+| keyoperations               |
+| library_management          |
+| manager                     |
+| mysql                       |
+| performance_schema          |
+| product_management          |
+| product_management1         |
+| product_management2         |
+| product_management4         |
+| product_service             |
+| sakila                      |
+| school_management_system    |
+| student                     |
+| sys                         |
+| user_service                |
+| visitor_management          |
+| world                       |
++-----------------------------+
+27 rows in set (0.00 sec)
+
+mysql> create database trigger;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'trigger' at line 1
+mysql> create database triggernew;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql>
+mysql> use triggernew;
+Database changed
+mysql> create table medicine(med_id int,medicine_name varchar(50),quantity int,price int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc medicine;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| med_id        | int         | YES  |     | NULL    |       |
+| medicine_name | varchar(50) | YES  |     | NULL    |       |
+| quantity      | int         | YES  |     | NULL    |       |
+| price         | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into medicine values(1,'combiflam',20,30),(2,'paracetamol',30,50),(3,'crocin',20,60);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from medicine;
++--------+---------------+----------+-------+
+| med_id | medicine_name | quantity | price |
++--------+---------------+----------+-------+
+|      1 | combiflam     |       20 |    30 |
+|      2 | paracetamol   |       30 |    50 |
+|      3 | crocin        |       20 |    60 |
++--------+---------------+----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table neworder(med_id int,odate date,newquantity int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc neworder;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| med_id      | int  | YES  |     | NULL    |       |
+| odate       | date | YES  |     | NULL    |       |
+| newquantity | int  | YES  |     | NULL    |       |
++-------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> delimiter $$
+mysql> create trigger newtrigger
+    -> after update on medicine
+    -> for each row
+    -> begin
+    -> if new.quantity<20 then
+    -> insert into neworder values(new.med_id,sysdate(),200);
+    -> end if;
+    -> end;
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> update medicine set quantity=15 where med_id=1;
+    -> $$
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from neworder;
+    -> $$
++--------+------------+-------------+
+| med_id | odate      | newquantity |
++--------+------------+-------------+
+|      1 | 2023-06-06 |         200 |
++--------+------------+-------------+
+1 row in set (0.00 sec)
+
+mysql>

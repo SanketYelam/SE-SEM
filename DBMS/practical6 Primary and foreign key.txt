@@ -1,0 +1,38 @@
+create database keyoperations;
+
+
+use keyoperations;
+
+
+create table student(roll_no int,name varchar(60),mobile varchar(50));
+
+
+desc student;
+
+
+
+insert into student values(1,'gaurav','34567532123456'),(2,'sagar','3456775434');
+
+
+select * from student;
+
+
+alter table student add primary key(roll_no);
+
+
+desc student;
+
+
+
+create table Teacher(id int,name varchar(60),subject varchar(60),roll_no int,primary key(id));
+
+
+desc Teacher;
+
+
+alter table Teacher add foreign key(roll_no) references student(roll_no);
+
+
+
+desc Teacher;
+

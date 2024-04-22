@@ -1,0 +1,29 @@
+use xyz;
+
+create table student(roll int(20),name varchar(20),address varchar(20));
+insert into student values(1,'Abhijit','Pune'),(2,'Vishal','Wagholi'),(3,'Siddhant','Pimpari');
+select*from student;
+
+delimiter //
+create procedure STUD(IN r int(3))
+begin
+select*from student where roll=r;
+end;
+//
+
+call STUD(3);
+//
+call STUD(1);
+//
+
+create procedure display(IN r int(10),OUT nm char(20))
+begin
+select name into nm from student where roll=r;
+end;
+//
+call display(3,@nm);
+//
+select @nm
+//
+delimiter ;
+select @nm;

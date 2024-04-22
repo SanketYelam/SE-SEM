@@ -1,0 +1,28 @@
+package oop;
+import java.util.Scanner;
+public class Exception {
+	public static void main(String[]args){
+		int num1, num2 , result ;
+		Scanner in = new Scanner(System.in) ;
+		try {
+			System.out.println("Enter 1st number ");
+			num1 = Integer.parseInt(in.next());
+			System.out.println("Enter 2nd number ");
+			num2 = Integer.parseInt(in.next());
+			result= num1/num2;
+			System.out.println("Division :"+ result);
+			int x[]= new int[12];
+			x[5]=89;
+			
+		}
+		catch(ArithmeticException e)
+		{
+			System.out.println("Denomionator is zero"+e);
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Input is wrong"+ e);
+		}
+		
+	}
+
+}

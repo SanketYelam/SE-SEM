@@ -1,0 +1,110 @@
+
+ create database functions;
+
+ use functions;
+
+ create table student(roll_no int,name varchar(50),marks int,mobile varchar(50));
+
+ desc student;
+
+ insert into student values(1,'gaurav',60,'456763456'),(2,'sagar',50,'4567898765'),(3,'sanket',40,'6656567535');
+
+ select * from student;
+
+
+////comparism operator
+ select * from student where marks=60;
+ select * from student where marks>=60;
+ select * from student where marks<=60;
+ select * from student where marks<60;
+ select * from student where marks>60;
+ select * from student where marks!=60;
+
+
+ select * from student where name like 'sag%';
+ select * from student where name like '%et';
+ select * from student where name like '%nk%';
+ select * from student where name like '_anket';
+ select * from student where name not like '_anket';
+
+
+ select * from student where not marks=60;
+ select * from student where marks=60 and marks=40;
+ select * from student where marks=60 or marks=40;
+ select * from student where marks=60 xor marks=40;
+ select * from student where marks in(60,50,40);
+ select * from student where marks in(60,50);
+ select * from student where marks between 40 and 60;
+
+
+///arithematic operator
+ select name + marks as sum from student;
+ select name - marks as difference from student;
+ select mobile - marks as difference from student;
+ select mobile * marks as product from student;
+ select mobile / marks as quotient from student;
+ select mobile % marks as remainder from student;
+ select -marks as negated_value from student;
+
+
+ select concat('abc','xyz');
+ select length('gaurav');
+ select substring('gaurav',1,6);
+ select substring('gaurav',1,5);
+ select upper('gaurav');
+ select lower('GAURAV');
+ select trim('Gau rav');
+
+
+/////arithematic func
+ select abs(45);
+ select abs(-45);
+ select round(12,2);
+ select round(12,1);
+ select round(12);
+ select round(12.4);
+ select round(12.6);
+ select ceil(14.4);
+ select floor(15.7);
+ select mod(12,6);
+ select power(12,3);
+
+
+ select now();
+ select date(2023-3-4);
+ select time(9);
+ select time(500);
+
+/////date and time
+ select sysdate();
+ select curdate();
+ select last_day(sysdate());
+ select last_day(2023-06-06);
+ select last_day('2023-06-06');
+ select sysdate() from dual;
+
+////aggrigate func
+ select min(marks) from student;
+ select max(marks) from student;
+ select sum(marks) from student;
+ select avg(marks) from student;
+ select count(marks) from student;
+ select count(*) from student;
+
+
+ create table teacher1(id int,marks int);
+ insert into teacher values(1,20),(2,40);
+
+ select * from teacher;
+
+ select marks from student union select marks from teacher;
+ select marks from student union all select marks from teacher;
+ select marks from student except select marks from teacher;
+
+ select student.marks from student INNER JOIN teacher on student.roll_no=teacher.id;
+ select student.marks from student INNER JOIN teacher on student.marks=teacher.marks;
+ select student.marks from student LEFT JOIN teacher on student.marks=teacher.marks;
+ select student.marks from student RIGHT JOIN teacher on student.marks=teacher.marks;
+ select * from student CROSS JOIN teacher;
+
+

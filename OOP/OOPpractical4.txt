@@ -1,0 +1,51 @@
+package oop;
+
+import java.util.Scanner;
+
+public class Dynamic {
+	public static void main(String[] args) {
+		shape s;
+		Triangle t = new Triangle ();
+		s=t;
+		s.input();
+		s.compute_area();
+		Rectangle r = new Rectangle();
+		s=r;
+		s.input();
+		s.compute_area();
+	}
+
+}
+
+abstract class shape {
+	double val1, val2;
+
+	void input() {
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter the 1st value :");
+		val1 = s.nextDouble();
+		System.out.println("Enter the 2nd value :");
+		val2 = s.nextDouble();
+
+	}
+
+	abstract void compute_area();
+
+}
+
+class Triangle extends shape{
+	void compute_area() {
+		double area;
+		area=1.0f/2.0f *val1 *val2;
+		System.out.println("Triangle of the area :"+area);
+	}
+}
+class Rectangle extends shape{
+	void compute_area() {
+		double area ;
+		area=val1 * val2;
+		System.out.println("Rectangle of the area :"+area);
+ }
+
+}
+

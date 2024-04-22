@@ -1,0 +1,50 @@
+package oop;
+import java.util.Scanner;
+public class Pub2 {
+	public static void main(String[]args) {
+		Book b = new Book();
+		b.orderCopies();
+		b.saleCopy();
+		
+	}
+
+}
+class Publication{
+	String title;
+	int copies,price;
+	void saleCopy() {
+		
+	}
+	
+}
+class Book{
+	String title,author;
+	int copies,price;
+	void saleCopy() {
+		price = 145;
+		System.out.println("Total copies : "+copies*price);
+		
+	}
+	void orderCopies() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the copies : ");
+		copies =in.nextInt();
+		
+	}
+}
+class Magazine{
+	String title;
+	int copies,price;
+	void saleCopy() {
+		
+	}
+	void orderQty() {
+		
+	}
+	void Currentissue() {
+		
+	}
+	void receiveissue() {
+		
+	}
+}

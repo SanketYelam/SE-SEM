@@ -1,0 +1,25 @@
+use xyz;
+create table medicine(mid int(29),medname varchar(28),price int(10),Quantity int(20));
+insert into medicine values(1,'Crocin',20,25),(2,'Calpol',355,30);
+select *from medicine;
+create table neworder(mid int(20),odate date,newquantity int(20));
+desc neworder;
+delimiter $$
+create trigger newordermedicine
+after update on medicine
+for each row
+begin
+if new.quantity<20 then
+insert into neworder values(new.mid,sysdate(),200);
+end if;
+end;
+$$
+
+select*from neworder;
+$$
+update medicine set quantity =15 where mid=1;
+$$
+select*from medicine;
+$$
+select*from neworder;
+$$

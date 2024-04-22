@@ -1,0 +1,702 @@
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| company                     |
+| dbms                        |
+| ddl                         |
+| expense_management          |
+| expense_management_20_april |
+| expense_management_26_april |
+| expense_management_27_april |
+| information_schema          |
+| joins                       |
+| keyoperations               |
+| library_management          |
+| manager                     |
+| mysql                       |
+| performance_schema          |
+| product_management          |
+| product_management1         |
+| product_management2         |
+| product_management4         |
+| product_service             |
+| sakila                      |
+| school_management_system    |
+| student                     |
+| sys                         |
+| user_service                |
+| visitor_management          |
+| world                       |
++-----------------------------+
+26 rows in set (0.00 sec)
+
+mysql> create database functions;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use functions;
+Database changed
+mysql> create table student;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table student(roll_no int,name varchar(50),marks int,mobile varchar(50));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> dsec student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dsec student' at line 1
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | YES  |     | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| marks   | int         | YES  |     | NULL    |       |
+| mobile  | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student values(1,'gaurav',60,'456763456'),(2,'sagar',50,'4567898765'),(3,'sanket',40,'6656567535');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where marks==60;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '==60' at line 1
+mysql> select * from student where marks=60;
++---------+--------+-------+-----------+
+| roll_no | name   | marks | mobile    |
++---------+--------+-------+-----------+
+|       1 | gaurav |    60 | 456763456 |
++---------+--------+-------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where marks>=60;
++---------+--------+-------+-----------+
+| roll_no | name   | marks | mobile    |
++---------+--------+-------+-----------+
+|       1 | gaurav |    60 | 456763456 |
++---------+--------+-------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where marks<=60;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where marks<60;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where marks>60;
+Empty set (0.00 sec)
+
+mysql> select * from student where marks!=60;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like 'sag%';
++---------+-------+-------+------------+
+| roll_no | name  | marks | mobile     |
++---------+-------+-------+------------+
+|       2 | sagar |    50 | 4567898765 |
++---------+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name like '%et';
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name like '%nk%';
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name like '_anket';
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where name not like '_anket';
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where not marks=60;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where marks=60 and marks=40;
+Empty set (0.00 sec)
+
+mysql> select * from student where marks=60 or marks=40;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where marks=60 xor marks=40;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where marks in(60,50,40);
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where marks in(60,50);
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
++---------+--------+-------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where marks between 40 and 60;
++---------+--------+-------+------------+
+| roll_no | name   | marks | mobile     |
++---------+--------+-------+------------+
+|       1 | gaurav |    60 | 456763456  |
+|       2 | sagar  |    50 | 4567898765 |
+|       3 | sanket |    40 | 6656567535 |
++---------+--------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student where marks between 40 or 60;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'or 60' at line 1
+mysql> select * from student where marks like pattern;
+ERROR 1054 (42S22): Unknown column 'pattern' in 'where clause'
+mysql> select name + marks as sum from student;
++------+
+| sum  |
++------+
+|   60 |
+|   50 |
+|   40 |
++------+
+3 rows in set, 3 warnings (0.01 sec)
+
+mysql> select name - marks as difference from student;
++------------+
+| difference |
++------------+
+|        -60 |
+|        -50 |
+|        -40 |
++------------+
+3 rows in set, 3 warnings (0.00 sec)
+
+mysql> select mobile - marks as difference from student;
++------------+
+| difference |
++------------+
+|  456763396 |
+| 4567898715 |
+| 6656567495 |
++------------+
+3 rows in set (0.00 sec)
+
+mysql> select mobile * marks as product from student;
++--------------+
+| product      |
++--------------+
+|  27405807360 |
+| 228394938250 |
+| 266262701400 |
++--------------+
+3 rows in set (0.00 sec)
+
+mysql> select mobile / marks as quotient from student;
++-------------------+
+| quotient          |
++-------------------+
+| 7612724.266666667 |
+|        91357975.3 |
+|     166414188.375 |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select mobile % marks as remainder from student;
++-----------+
+| remainder |
++-----------+
+|        16 |
+|        15 |
+|        15 |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select -marks as negated_value from student;
++---------------+
+| negated_value |
++---------------+
+|           -60 |
+|           -50 |
+|           -40 |
++---------------+
+3 rows in set (0.00 sec)
+
+mysql> select concat('abc','xyz');
++---------------------+
+| concat('abc','xyz') |
++---------------------+
+| abcxyz              |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select length('gaurav');
++------------------+
+| length('gaurav') |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select substring('gaurav',1,6);
++-------------------------+
+| substring('gaurav',1,6) |
++-------------------------+
+| gaurav                  |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select substring('gaurav',1,5);
++-------------------------+
+| substring('gaurav',1,5) |
++-------------------------+
+| gaura                   |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select upper('gaurav');
++-----------------+
+| upper('gaurav') |
++-----------------+
+| GAURAV          |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select lower('GAURAV');
++-----------------+
+| lower('GAURAV') |
++-----------------+
+| gaurav          |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select trim('Gau rav');
++-----------------+
+| trim('Gau rav') |
++-----------------+
+| Gau rav         |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select abs(45);
++---------+
+| abs(45) |
++---------+
+|      45 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-45);
++----------+
+| abs(-45) |
++----------+
+|       45 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select round(12,2);
++-------------+
+| round(12,2) |
++-------------+
+|          12 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select round(12,1);
++-------------+
+| round(12,1) |
++-------------+
+|          12 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select round(12);
++-----------+
+| round(12) |
++-----------+
+|        12 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select round(12.4);
++-------------+
+| round(12.4) |
++-------------+
+|          12 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select round(12.6);
++-------------+
+| round(12.6) |
++-------------+
+|          13 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(14.4);
++------------+
+| ceil(14.4) |
++------------+
+|         15 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(15.7);
++-------------+
+| floor(15.7) |
++-------------+
+|          15 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select mod(12,6);
++-----------+
+| mod(12,6) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select power(12,3);
++-------------+
+| power(12,3) |
++-------------+
+|        1728 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2023-06-06 21:00:32 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date(2023-3-4);
++----------------+
+| date(2023-3-4) |
++----------------+
+| NULL           |
++----------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select date(datetime);
+ERROR 1054 (42S22): Unknown column 'datetime' in 'field list'
+mysql> select time(9);
++----------+
+| time(9)  |
++----------+
+| 00:00:09 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select time(500);
++-----------+
+| time(500) |
++-----------+
+| 00:05:00  |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2023-06-06 21:03:12 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-06-06 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select last_day(sysdate());
++---------------------+
+| last_day(sysdate()) |
++---------------------+
+| 2023-06-30          |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select last_day(2023-06-06);
++----------------------+
+| last_day(2023-06-06) |
++----------------------+
+| NULL                 |
++----------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select last_day('2023-06-06');
++------------------------+
+| last_day('2023-06-06') |
++------------------------+
+| 2023-06-30             |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_add('2023-05-07','2023-07-08');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''2023-07-08')' at line 1
+mysql> select date_add('2023-05-07' , interval 15 days) as new date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days) as new date' at line 1
+mysql> select date_add('2023-05-07' , interval 15 days) as new_date
+    -> select date_add('2023-05-07' , interval 15 days) as new_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days) as new_date
+select date_add('2023-05-07' , interval 15 days) as new_date' at line 1
+mysql> select date_add('2023-05-07',INTERVAL 15 days) as new_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days) as new_date' at line 1
+mysql> select date_add('2023-05-07',INTERVAL 15 days)As new_date;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days)As new_date' at line 1
+mysql> select date_add('2023-05-07',INTERVAL 15 days)As NEW_DATE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days)As NEW_DATE' at line 1
+mysql> select date_add('2023-05-07',INTERVAL 15 days)As NEW_DATE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'days)As NEW_DATE' at line 1
+mysql> select sysdate from dual;
+ERROR 1054 (42S22): Unknown column 'sysdate' in 'field list'
+mysql> select sysdate() from dual;
++---------------------+
+| sysdate()           |
++---------------------+
+| 2023-06-06 21:09:40 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select months_between('2023-06-07','2023-08-09');
+ERROR 1305 (42000): FUNCTION functions.months_between does not exist
+mysql> select min(marks) from student;
++------------+
+| min(marks) |
++------------+
+|         40 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from student;
++------------+
+| max(marks) |
++------------+
+|         60 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from student;
++------------+
+| sum(marks) |
++------------+
+|        150 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) from student;
++------------+
+| avg(marks) |
++------------+
+|    50.0000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(marks) from student;
++--------------+
+| count(marks) |
++--------------+
+|            3 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from student;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> create table teacher(id int,marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into teacher values(1,30),(2,40)(3,49);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(3,49)' at line 1
+mysql> insert into teacher values((1,30),(2,40)(3,49));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(3,49))' at line 1
+mysql> create table teacher1(id int,marks int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into teacher values(1,20),(2,40);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from teacher;
++------+-------+
+| id   | marks |
++------+-------+
+|    1 |    20 |
+|    2 |    40 |
++------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select marks from student union select marks from teacher;
++-------+
+| marks |
++-------+
+|    60 |
+|    50 |
+|    40 |
+|    20 |
++-------+
+4 rows in set (0.00 sec)
+
+mysql> select marks from student unionall select marks from teacher;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select marks from teacher' at line 1
+mysql> select marks from student union all select marks from teacher;
++-------+
+| marks |
++-------+
+|    60 |
+|    50 |
+|    40 |
+|    20 |
+|    40 |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select marks from student except select marks from teacher;
++-------+
+| marks |
++-------+
+|    60 |
+|    50 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select student.marks from student INNER JOIN teacher on student.roll_no=teacher.id;
++-------+
+| marks |
++-------+
+|    60 |
+|    50 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select student.marks from student INNER JOIN teacher on student.marks=teacher.marks;
++-------+
+| marks |
++-------+
+|    40 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select student.marks from student LEFT JOIN teacher on student.marks=teacher.marks;
++-------+
+| marks |
++-------+
+|    60 |
+|    50 |
+|    40 |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> select student.marks from student RIGHT JOIN teacher on student.marks=teacher.marks;
++-------+
+| marks |
++-------+
+|  NULL |
+|    40 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select student.marks from student FULL JOIN teacher on student.marks=teacher.marks;
+ERROR 1054 (42S22): Unknown column 'student.marks' in 'field list'
+mysql> select student.marks from student FULL OUTER  JOIN teacher on student.marks=teacher.marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OUTER  JOIN teacher on student.marks=teacher.marks' at line 1
+mysql> select student.marks from student OUTER JOIN teacher on student.marks=teacher.marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OUTER JOIN teacher on student.marks=teacher.marks' at line 1
+mysql> select student.marks from student FULL JOIN teacher on student.marks=teacher.marks;
+ERROR 1054 (42S22): Unknown column 'student.marks' in 'field list'
+mysql> select * from student CROSS JOIN teacher;
++---------+--------+-------+------------+------+-------+
+| roll_no | name   | marks | mobile     | id   | marks |
++---------+--------+-------+------------+------+-------+
+|       1 | gaurav |    60 | 456763456  |    2 |    40 |
+|       1 | gaurav |    60 | 456763456  |    1 |    20 |
+|       2 | sagar  |    50 | 4567898765 |    2 |    40 |
+|       2 | sagar  |    50 | 4567898765 |    1 |    20 |
+|       3 | sanket |    40 | 6656567535 |    2 |    40 |
+|       3 | sanket |    40 | 6656567535 |    1 |    20 |
++---------+--------+-------+------------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql>

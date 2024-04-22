@@ -1,0 +1,73 @@
+public class Generics {      // generic classs defineed
+	static boolean isPrime(int num)    
+	{
+		int flag=0;				// PRIME number
+		for(int i=2;i<num;i++)
+			if(num%i==0)
+			{
+				flag=1;
+				break;
+			}
+		if(flag==0)
+			return true;
+		return false;
+	}
+
+	static<T> void count(String type, T[] element)  //generic method
+	{
+		int even=-0, odd=0,prime=0,palin=0;
+		if(type.equals("even"))
+		{
+			for(T value : element)
+				if(Integer.parseInt(value.toString())%2==0)
+					even++;
+			System.out.println("Total even:" +even);
+			
+		}
+		if(type.equals("odd"))
+		{
+			for(T value : element)
+				if(Integer.parseInt(value.toString())%2!=0)
+					odd++;
+			System.out.println("Total odd:" +odd);
+			
+		}
+		if(type.equals("prime"))
+		{
+			for(T value : element)
+				if(isPrime(Integer.parseInt(value.toString())))
+					prime++;
+			System.out.println("Total prime:" +prime);
+			
+		}
+		
+		if(type.equals("pallindrome"))
+		{
+			for(T value : element)
+				
+			{
+				StringBuffer rev = new StringBuffer(value.toString());
+			if(value.toString().equals(new String(rev.reverse())))
+				palin++;
+			
+		}
+		System.out.println("Total palindrome" +palin);
+		
+	}
+}
+
+public static void main(String[] args)
+{
+	Integer iarray[]= {45,7,12,84,38,115,29,30,19};
+	count("even", iarray);
+	Byte barray[] = { 45,7,12,84,38,115,29,30,19};
+	count("even", barray);
+	Short  sarray[] = { 45,70,127,849,38,115,29,30,19};
+	count("odd", sarray);
+	Long larray[] = { 45L,70L,127L,849L,35L,115L,29L,30L,19L};
+	count("odd", larray);
+	count("prime", barray);
+	count("palindrome", iarray);
+	
+}
+}

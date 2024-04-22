@@ -1,0 +1,64 @@
+package oop;
+
+public class Interface {
+	public static void main (String[]args) {
+		vehicles v;
+		v = new Bicycle();
+		v.gearchange();
+		v.speedup();
+		v.applybreak();
+		v = new Bike() ;
+		v.gearchange();
+		v.speedup();
+		v.applybreak();
+		v = new Car ();
+		v.gearchange();
+		v.speedup();
+		v.applybreak();
+		
+	}
+
+}
+interface vehicles{
+	public void gearchange();
+	public void speedup();
+	public void applybreak();
+}
+class Bicycle implements vehicles {
+	public void gearchange() {
+		System.out.println("Gear changed for bicycle");
+	}
+	public void speedup() {
+		System.out.println("Speedup for bicycle");
+	}
+	public void applybreak() {
+		System.out.println("Applybreak for bicycle");
+	}
+	
+}
+class Bike implements vehicles{
+	public void gearchange() {
+		System.out.println("Gear changed for bike");
+	}
+	public void speedup() {
+		System.out.println("Speedup for bike");
+	}
+	public voi applybreak() {
+		System.out.println("Applybreak for bike");
+	}
+	
+	
+}
+class Car implements vehicles {
+	public void gearchange() {
+		System.out.println("Gear changed for car");
+	}
+	public void speedup() {
+		System.out.println("Speedup for car");
+	}
+	public void applybreak() {
+		System.out.println("Applybreak for car");
+	}
+	
+}
+

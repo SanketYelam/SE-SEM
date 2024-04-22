@@ -1,0 +1,68 @@
+package practical1;
+
+import java.util.Scanner;
+
+public class Complex {
+	float real,img;
+	public Complex() {
+		real=0;
+		img=0;
+	}
+	public Complex(float a,float b) {
+		real=a;
+		img=b;
+	}
+	public void display(Complex C1,Complex C2) {
+		System.out.println("Print first complex number=("+C1.real+")+("+C1.img+")i");
+		System.out.println("Print second complex Number=("+C2.real+")+("+C2.img+")i");
+	}
+	public void add(Complex C1,Complex C2) {
+		float real,img;
+		real=C1.real+C2.real;
+		img=C1.img+C2.img;
+		System.out.println("Addition of two Complex number is=("+real+")+("+img+")i");
+	}
+	public void substraction(Complex C1,Complex C2) {
+		float real,img;
+		real=C1.real-C2.real;
+		img=C1.img-C2.img;
+		System.out.println("Substraction of two complex number is=("+real+")+("+img+")i");
+	}
+	public void Multiplication(Complex C1,Complex C2)
+	{
+		float real,img;
+		real=C1.real*C2.real;
+		img=C1.img*C2.img;
+		System.out.println("Multiplication of two complex number is=("+real+")+("+img+")i");
+	}
+	public void division(Complex C1,Complex C2) {
+		float real,img;
+		real=C1.real/C2.real;
+		img=C1.img/C2.img;
+		System.out.println("Division of complex numbers are=("+real+")+("+img+")i");
+	}
+	public static void main(String args[]) {
+		float num1,num2;
+		Complex a=new Complex();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the Complex number in a+bi format:");
+		System.out.println("Enter the real part of first number:a:");
+		num1=sc.nextFloat();
+		System.out.println("Enter the imaginary part of first number:b");
+		num2=sc.nextFloat();
+		Complex Comp1=new Complex(num1,num2);
+		System.out.println("Enter the rael part of second number:a");
+		num1=sc.nextFloat();
+		System.out.println("Enter the imaginary part of second number:b");
+		num2=sc.nextFloat();
+		Complex Comp2=new Complex(num1,num2);
+		a.display(Comp1,Comp2);
+		a.add(Comp1,Comp2);
+		a.substraction(Comp1,Comp2);
+		a.Multiplication(Comp1, Comp2);
+		a.division(Comp1, Comp2);
+		
+		
+	}
+
+}

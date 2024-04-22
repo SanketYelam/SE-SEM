@@ -1,0 +1,127 @@
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| company                     |
+| dbms                        |
+| ddl                         |
+| expense_management          |
+| expense_management_20_april |
+| expense_management_26_april |
+| expense_management_27_april |
+| functions                   |
+| information_schema          |
+| joins                       |
+| keyoperations               |
+| library_management          |
+| manager                     |
+| mysql                       |
+| performance_schema          |
+| product_management          |
+| product_management1         |
+| product_management2         |
+| product_management4         |
+| product_service             |
+| sakila                      |
+| school_management_system    |
+| student                     |
+| sys                         |
+| user_service                |
+| visitor_management          |
+| world                       |
++-----------------------------+
+27 rows in set (0.01 sec)
+
+mysql> use student;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_student |
++-------------------+
+| person            |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> use ddl;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_ddl |
++---------------+
+| school        |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> desc school;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| roll_no  | int         | YES  |     | NULL    |       |
+| name     | varchar(60) | YES  |     | NULL    |       |
+| marks    | int         | YES  |     | NULL    |       |
+| mobileNo | varchar(40) | YES  |     | NULL    |       |
+| subject  | varchar(50) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from school;
+Empty set (0.00 sec)
+
+mysql> insert into  insert into student values(1,'gaurav',80,'7020611722'),(2,'sagar',90,'1020304050'),(3,'sanket',95,'20303030203');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into student values(1,'gaurav',80,'7020611722'),(2,'sagar',90,'1020304050' at line 1
+mysql> insert into  insert into school values(1,'gaurav',80,'7020611722'),(2,'sagar',90,'1020304050'),(3,'sanket',95,'20303030203');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into school values(1,'gaurav',80,'7020611722'),(2,'sagar',90,'1020304050'' at line 1
+mysql> insert into school values(1,'gaurav',80,'7020611722'),(2,'sagar',90,'1020304050'),(3,'sanket',95,'20303030203');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into school values(1,'gaurav',80,'7020611722','maths'),(2,'sagar',90,'1020304050','physics'),(3,'sanket',95,'20303030203','chemistry');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from school;
++---------+--------+-------+-------------+-----------+
+| roll_no | name   | marks | mobileNo    | subject   |
++---------+--------+-------+-------------+-----------+
+|       1 | gaurav |    80 | 7020611722  | maths     |
+|       2 | sagar  |    90 | 1020304050  | physics   |
+|       3 | sanket |    95 | 20303030203 | chemistry |
++---------+--------+-------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> create view schoolview as select name,marks,subject from school;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from schoolview;
++--------+-------+-----------+
+| name   | marks | subject   |
++--------+-------+-----------+
+| gaurav |    80 | maths     |
+| sagar  |    90 | physics   |
+| sanket |    95 | chemistry |
++--------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update schoolview set subject='Bio' where marks=80;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from schoolview;
++--------+-------+-----------+
+| name   | marks | subject   |
++--------+-------+-----------+
+| gaurav |    80 | Bio       |
+| sagar  |    90 | physics   |
+| sanket |    95 | chemistry |
++--------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from school;
++---------+--------+-------+-------------+-----------+
+| roll_no | name   | marks | mobileNo    | subject   |
++---------+--------+-------+-------------+-----------+
+|       1 | gaurav |    80 | 7020611722  | Bio       |
+|       2 | sagar  |    90 | 1020304050  | physics   |
+|       3 | sanket |    95 | 20303030203 | chemistry |
++---------+--------+-------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql>

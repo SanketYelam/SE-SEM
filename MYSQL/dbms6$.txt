@@ -1,0 +1,119 @@
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| company                     |
+| dbms                        |
+| ddl                         |
+| expense_management          |
+| expense_management_20_april |
+| expense_management_26_april |
+| expense_management_27_april |
+| information_schema          |
+| joins                       |
+| library_management          |
+| manager                     |
+| mysql                       |
+| performance_schema          |
+| product_management          |
+| product_management1         |
+| product_management2         |
+| product_management4         |
+| product_service             |
+| sakila                      |
+| school_management_system    |
+| student                     |
+| sys                         |
+| user_service                |
+| visitor_management          |
+| world                       |
++-----------------------------+
+25 rows in set (0.00 sec)
+
+mysql> create database key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key' at line 1
+mysql> create database keys;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'keys' at line 1
+mysql> create database keyoperations;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use keyoperations;
+Database changed
+mysql> create table student(
+    -> roll_no int,name varchar(60),mobile varchar(50));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | YES  |     | NULL    |       |
+| name    | varchar(60) | YES  |     | NULL    |       |
+| mobile  | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into student values(1,'gaurav','34567532123456'),(2,'sagar','3456775434');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++---------+--------+----------------+
+| roll_no | name   | mobile         |
++---------+--------+----------------+
+|       1 | gaurav | 34567532123456 |
+|       2 | sagar  | 3456775434     |
++---------+--------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add primary key(roll_no);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(60) | YES  |     | NULL    |       |
+| mobile  | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table Teacher(
+    -> id int,name varchar(60),subject varchar(60),roll_no int,primary key(id));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc Teacher;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(60) | YES  |     | NULL    |       |
+| subject | varchar(60) | YES  |     | NULL    |       |
+| roll_no | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table Teacher add foreign key(roll_no) references student(roll_no);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Teacher;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(60) | YES  |     | NULL    |       |
+| subject | varchar(60) | YES  |     | NULL    |       |
+| roll_no | int         | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE table_name
+    -> ADD CONSTRAINT constraint_name FOREIGN KEY (column_name)
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql>
